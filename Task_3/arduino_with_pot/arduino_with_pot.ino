@@ -11,24 +11,27 @@
 int Led_state=0;
 int Pot_value=0;
 
-//SoftwareSerial mySerial(2, 3); // RX, TX
+SoftwareSerial mySerial(2, 3); // RX, TX
 
 void setup()
 {
   pinMode(ledPin, OUTPUT);
   pinMode(potWiper, INPUT);
-  Serial.begin(9600);
-  //mySerial.begin(9600); // SoftwareSerial
+  //Serial.begin(9600);
+  mySerial.begin(9600); // SoftwareSerial
 }
 
 void loop()
 {	
   Pot_value=analogRead(potWiper);
   int Mapped_value=map(Pot_value,0,1023,0,180);
-  Serial.write(Mapped_value);
-  if(Serial.available()>0)
+  mySerial.write(Mapped_value);
+  
+  delay(1000);
+  if(mySerial.available()>0)
   {
-  	Led_state=Serial.read();
+  	Led_state=mySerial.read();
   	digitalWrite(ledPin,Led_state);
+    delay(1000);
   }
 }
