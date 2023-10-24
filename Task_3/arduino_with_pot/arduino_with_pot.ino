@@ -27,7 +27,7 @@ void loop()
   int Mapped_value=map(Pot_value,0,1023,0,180);
   mySerial.write(Mapped_value);
   
-  delay(1000);
+  delay(100);
   if(mySerial.available()>0)
   {
   	Led_state=mySerial.read();
